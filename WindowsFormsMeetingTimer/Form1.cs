@@ -20,11 +20,13 @@ namespace org.meetingontime.ui.wf
         public Form1()
         {
             InitializeComponent();
-            timeBox.Text = (DateTime.Now.AddMinutes(5)-DateTime.Now).ToString();
-            time = new MeetingTimer();
-            TimeSpan.TryParse(timeBox.Text, out timeSpan);
+            timeBox.Text = "00:05:00";
+            SetTimeSpan("00:05:00");
 
-            timer = new System.Timers.Timer(1000);
+            time = new MeetingTimer();
+            time.SetTimeSpan(timeSpan);
+
+            timer = new System.Timers.Timer(100);
             timer.Elapsed += HandleTimer;
         }
 
@@ -32,7 +34,12 @@ namespace org.meetingontime.ui.wf
         {
             timeSpan = time.GetTimeSpan();
             
-            SetText(timeSpan.ToString());
+            SetText(timeSpan);
+        }
+
+        private void SetTimeSpan (string text)
+        {
+            TimeSpan.TryParse(text, out timeSpan);
         }
 
         private void startStopButton_Click(object sender, EventArgs e)
@@ -40,13 +47,15 @@ namespace org.meetingontime.ui.wf
             if(time.IsRunning())
             {
                 time.Stop();
-                timeBox.Enabled = true;
                 timer.Stop();
-            } else
+                EnableButtons();
+            }
+            else
             {
+                SetTimeSpan(timeBox.Text);
                 time.Start(timeSpan);
-                timeBox.Enabled = false;
                 timer.Start();
+                DisableButtons();
             }
         }
         delegate void SetTextCallback(string text);
@@ -65,6 +74,39 @@ namespace org.meetingontime.ui.wf
             {
                 this.timeBox.Text = text;
             }
+        }
+
+        private void SetText(TimeSpan timeSpan)
+        {
+            string text = timeSpan.ToString();
+            text = text.Substring(0,text.LastIndexOf("."));
+            SetText(text);
+        } 
+
+        private void DisableButtons()
+        {
+            timeBox.Enabled = false;
+            startStopButton.Text = "Stop";
+        }
+
+        private void EnableButtons()
+        {
+            timeBox.Enabled = true;
+            startStopButton.Text = "Start";
+        }
+
+        private void increasetime_Click(object sender, EventArgs e)
+        {
+            time.AddMilliseconds(600000);
+            timeSpan = time.GetTimeSpan();
+            SetText(timeSpan);
+        }
+
+        private void decreasetime_Click(object sender, EventArgs e)
+        {
+            time.AddMilliseconds(-600000);
+            timeSpan = time.GetTimeSpan();
+            SetText(timeSpan);
         }
     }
 }

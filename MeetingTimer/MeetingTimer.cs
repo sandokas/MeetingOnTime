@@ -74,11 +74,11 @@ namespace org.meetingontime
         {
             return _running;
         }
-        public void AddMilliseconds(int milliseconds)
+        public void AddMilliseconds(double milliseconds)
         {
             targetTime.AddMilliseconds(milliseconds);
         }
-        public void RemoveMilliseconds(int milliseconds)
+        public void RemoveMilliseconds(double milliseconds)
         {
             targetTime.AddMilliseconds(-milliseconds);
         }

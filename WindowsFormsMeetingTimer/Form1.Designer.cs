@@ -30,30 +30,54 @@
         {
             this.startStopButton = new System.Windows.Forms.Button();
             this.timeBox = new System.Windows.Forms.TextBox();
+            this.decreasetime = new System.Windows.Forms.Button();
+            this.increasetime = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // startStopButton
             // 
-            this.startStopButton.Location = new System.Drawing.Point(187, 33);
+            this.startStopButton.Location = new System.Drawing.Point(179, 35);
             this.startStopButton.Name = "startStopButton";
             this.startStopButton.Size = new System.Drawing.Size(75, 23);
             this.startStopButton.TabIndex = 1;
-            this.startStopButton.Text = "button1";
+            this.startStopButton.Text = "Start";
             this.startStopButton.UseVisualStyleBackColor = true;
             this.startStopButton.Click += new System.EventHandler(this.startStopButton_Click);
             // 
             // timeBox
             // 
-            this.timeBox.Location = new System.Drawing.Point(48, 33);
+            this.timeBox.Location = new System.Drawing.Point(119, 37);
             this.timeBox.Name = "timeBox";
-            this.timeBox.Size = new System.Drawing.Size(100, 20);
+            this.timeBox.Size = new System.Drawing.Size(54, 20);
             this.timeBox.TabIndex = 2;
+            // 
+            // decreasetime
+            // 
+            this.decreasetime.Location = new System.Drawing.Point(71, 35);
+            this.decreasetime.Name = "decreasetime";
+            this.decreasetime.Size = new System.Drawing.Size(18, 22);
+            this.decreasetime.TabIndex = 3;
+            this.decreasetime.Text = "<";
+            this.decreasetime.UseVisualStyleBackColor = true;
+            this.decreasetime.Click += new System.EventHandler(this.decreasetime_Click);
+            // 
+            // increasetime
+            // 
+            this.increasetime.Location = new System.Drawing.Point(95, 35);
+            this.increasetime.Name = "increasetime";
+            this.increasetime.Size = new System.Drawing.Size(18, 22);
+            this.increasetime.TabIndex = 4;
+            this.increasetime.Text = ">";
+            this.increasetime.UseVisualStyleBackColor = true;
+            this.increasetime.Click += new System.EventHandler(this.increasetime_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.increasetime);
+            this.Controls.Add(this.decreasetime);
             this.Controls.Add(this.timeBox);
             this.Controls.Add(this.startStopButton);
             this.Name = "Form1";
@@ -67,6 +91,8 @@
 
         private System.Windows.Forms.Button startStopButton;
         private System.Windows.Forms.TextBox timeBox;
+        private System.Windows.Forms.Button decreasetime;
+        private System.Windows.Forms.Button increasetime;
     }
 }
 
