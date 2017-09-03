@@ -36,9 +36,9 @@
             // 
             // startStopButton
             // 
-            this.startStopButton.Location = new System.Drawing.Point(179, 35);
+            this.startStopButton.Location = new System.Drawing.Point(179, 37);
             this.startStopButton.Name = "startStopButton";
-            this.startStopButton.Size = new System.Drawing.Size(75, 23);
+            this.startStopButton.Size = new System.Drawing.Size(75, 20);
             this.startStopButton.TabIndex = 1;
             this.startStopButton.Text = "Start";
             this.startStopButton.UseVisualStyleBackColor = true;
@@ -53,21 +53,21 @@
             // 
             // decreasetime
             // 
-            this.decreasetime.Location = new System.Drawing.Point(71, 35);
+            this.decreasetime.Location = new System.Drawing.Point(71, 37);
             this.decreasetime.Name = "decreasetime";
-            this.decreasetime.Size = new System.Drawing.Size(18, 22);
+            this.decreasetime.Size = new System.Drawing.Size(18, 20);
             this.decreasetime.TabIndex = 3;
-            this.decreasetime.Text = "<";
+            this.decreasetime.Text = "-";
             this.decreasetime.UseVisualStyleBackColor = true;
             this.decreasetime.Click += new System.EventHandler(this.decreasetime_Click);
             // 
             // increasetime
             // 
-            this.increasetime.Location = new System.Drawing.Point(95, 35);
+            this.increasetime.Location = new System.Drawing.Point(95, 37);
             this.increasetime.Name = "increasetime";
-            this.increasetime.Size = new System.Drawing.Size(18, 22);
+            this.increasetime.Size = new System.Drawing.Size(18, 20);
             this.increasetime.TabIndex = 4;
-            this.increasetime.Text = ">";
+            this.increasetime.Text = "+";
             this.increasetime.UseVisualStyleBackColor = true;
             this.increasetime.Click += new System.EventHandler(this.increasetime_Click);
             // 

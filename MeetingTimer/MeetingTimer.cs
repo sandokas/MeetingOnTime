@@ -17,10 +17,12 @@ namespace org.meetingontime
             _running = false;
         }
 
-        public MeetingTimer(double milliseconds)
+        public MeetingTimer(int hours, int minutes, int seconds, int milliseconds)
         {
-            this.Start(milliseconds);
+            TimeSpan timeSpan = new TimeSpan(0, hours, minutes, seconds, milliseconds);
+            this.SetTimeSpan(timeSpan);
         }
+
         public void Stop()
         {
             if (_running) { 
@@ -61,7 +63,16 @@ namespace org.meetingontime
         public TimeSpan GetTimeSpan()
         {
             //less reliable for distributed systems use GetTargetTime instead.
-            return (targetTime - DateTime.Now);
+            TimeSpan result;
+            if (_running)
+            {
+                result = targetTime - DateTime.Now;
+            }
+            else
+            {
+                result = targetTime - frozenTime;
+            }
+            return result;
         }
 
         public void SetTimeSpan(TimeSpan timespan)
@@ -76,11 +87,11 @@ namespace org.meetingontime
         }
         public void AddMilliseconds(double milliseconds)
         {
-            targetTime.AddMilliseconds(milliseconds);
+            targetTime = targetTime.AddMilliseconds(milliseconds);
         }
         public void RemoveMilliseconds(double milliseconds)
         {
-            targetTime.AddMilliseconds(-milliseconds);
+            targetTime = targetTime.AddMilliseconds(-milliseconds);
         }
     }
 }

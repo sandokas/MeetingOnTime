@@ -16,7 +16,7 @@ namespace org.meetingontime.ui.wf
     {
         private MeetingTimer time;
         private TimeSpan timeSpan;
-        private System.Timers.Timer timer;
+        private System.Timers.Timer visual;
         public Form1()
         {
             InitializeComponent();
@@ -26,8 +26,8 @@ namespace org.meetingontime.ui.wf
             time = new MeetingTimer();
             time.SetTimeSpan(timeSpan);
 
-            timer = new System.Timers.Timer(100);
-            timer.Elapsed += HandleTimer;
+            visual = new System.Timers.Timer(100);
+            visual.Elapsed += HandleTimer;
         }
 
         private void HandleTimer(Object source, ElapsedEventArgs e)
@@ -47,14 +47,14 @@ namespace org.meetingontime.ui.wf
             if(time.IsRunning())
             {
                 time.Stop();
-                timer.Stop();
+                visual.Stop();
                 EnableButtons();
             }
             else
             {
                 SetTimeSpan(timeBox.Text);
                 time.Start(timeSpan);
-                timer.Start();
+                visual.Start();
                 DisableButtons();
             }
         }
@@ -79,7 +79,9 @@ namespace org.meetingontime.ui.wf
         private void SetText(TimeSpan timeSpan)
         {
             string text = timeSpan.ToString();
-            text = text.Substring(0,text.LastIndexOf("."));
+            int dot = text.LastIndexOf(".");
+            if (dot > 0)
+                text = text.Substring(0,dot);
             SetText(text);
         } 
 
@@ -97,14 +99,14 @@ namespace org.meetingontime.ui.wf
 
         private void increasetime_Click(object sender, EventArgs e)
         {
-            time.AddMilliseconds(600000);
+            time.AddMilliseconds(60000);
             timeSpan = time.GetTimeSpan();
             SetText(timeSpan);
         }
 
         private void decreasetime_Click(object sender, EventArgs e)
         {
-            time.AddMilliseconds(-600000);
+            time.AddMilliseconds(-60000);
             timeSpan = time.GetTimeSpan();
             SetText(timeSpan);
         }
