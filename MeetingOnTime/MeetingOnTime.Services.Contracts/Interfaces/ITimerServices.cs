@@ -9,11 +9,16 @@ namespace MeetingOnTime.Services.Contracts
     {
         Task<string> CreateNewTimer();
         Task<DateTime> GetCurrentTime(string timerId);
+        Task<long> GetCurrentTimeSeconds(string timerId);
+        Task<string> GetCurrentTimeString(string timerId);
         Task<string> StartTimer(string timerId);
         Task<string> StopTimer(string timerId);
 
         Task<string> ResetTimer(string timerId);
-        Task<string> SetTimer(DateTime endTime);
+        Task<string> SetTime(DateTime endTime);
+        Task<string> SetTimeSeconds(long endTime);
+        Task<string> SetTimeString(string endTime);
+        Task<string> SetTimeString(string minutes, string seconds);
 
         event EventHandler TimerStarted;
         event EventHandler TimerStopped;
