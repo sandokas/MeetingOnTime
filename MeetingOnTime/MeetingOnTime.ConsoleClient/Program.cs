@@ -1,4 +1,8 @@
-﻿using System;
+﻿using MeetingOnTime.Services;
+using MeetingOnTime.Services.Contracts.DTOs;
+using MeetingOnTime.Services.Contracts.Interfaces;
+using System;
+using System.Threading.Tasks;
 
 namespace MeetingOnTime.ConsoleClient
 {
@@ -6,7 +10,13 @@ namespace MeetingOnTime.ConsoleClient
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            CallServices().Wait();
+        }
+        static async Task CallServices()
+        {
+            TimerService timerService = new TimerService();
+            Result<string> result = await timerService.CreateNewTimer();
+            Console.WriteLine($"Created timer with id:{result.value}");
         }
     }
 }
