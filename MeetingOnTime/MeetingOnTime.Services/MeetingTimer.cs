@@ -52,5 +52,6 @@ namespace MeetingOnTime.Services
                 return _currentlyStoppedTimeSpan;
             }
         }
+        public bool isRunning { get => _isStarted; }
     }
 }
