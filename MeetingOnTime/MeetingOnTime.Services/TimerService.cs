@@ -1,6 +1,7 @@
 ﻿using MeetingOnTime.Services.Contracts.DTOs;
 using MeetingOnTime.Services.Contracts.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MeetingOnTime.Services
@@ -8,11 +9,11 @@ namespace MeetingOnTime.Services
 
     public class TimerService : ITimerService
     {
-        private MeetingTimer timer;
+        private IList<MeetingTimer> timers;
        public async Task<Result<string>> CreateNewTimer()
         {
 
-            timer = new MeetingTimer();
+            var timer = new MeetingTimer();
 
 
 
