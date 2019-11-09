@@ -9,11 +9,7 @@ namespace MeetingOnTime.Services
     public class TimerService : ITimerService
     {
         private MeetingTimer timer;
-        private void Dummy()
-        {
-            ;
-        }
-        public async Task<Result<string>> CreateNewTimer()
+       public async Task<Result<string>> CreateNewTimer()
         {
 
             timer = new MeetingTimer();
@@ -23,9 +19,6 @@ namespace MeetingOnTime.Services
             var result = new Result<string>();
             result.value = timer.TimerId;
             result.isSucessfull = true;
-
-            //Persist Dummy
-            await Task.Run(Dummy);
 
             return result;
         }

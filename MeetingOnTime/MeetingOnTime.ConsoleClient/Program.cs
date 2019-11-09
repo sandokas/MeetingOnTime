@@ -15,7 +15,7 @@ namespace MeetingOnTime.ConsoleClient
         static async Task CallServices()
         {
             TimerService timerService = new TimerService();
-            Result<string> result = await timerService.CreateNewTimer();
+            Result<string> result = await timerService.CreateNewTimer().ConfigureAwait(false);
             Console.WriteLine($"Created timer with id:{result.value}");
         }
     }
