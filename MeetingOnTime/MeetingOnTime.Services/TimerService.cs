@@ -10,12 +10,17 @@ namespace MeetingOnTime.Services
     public class TimerService : ITimerService
     {
         private IList<MeetingTimer> timers;
-       public async Task<Result<string>> CreateNewTimer()
+        public TimerService()
         {
+            timers = new List<MeetingTimer>();
+        }
 
-            var timer = new MeetingTimer();
+        public async Task<Result<string>> CreateNewTimer(TimeSpan endTime)
+        {
+            var timer = new MeetingTimer(endTime);
 
-
+            // receive a persistence service and persist
+            timers.Add(timer);
 
             var result = new Result<string>();
             result.value = timer.TimerId;
@@ -24,7 +29,30 @@ namespace MeetingOnTime.Services
             return result;
         }
 
-        public Task<Result<long>> GetElapsedSeconds(string timerId)
+        public async Task<Result<string>> CreateNewTimerSeconds(long endTime)
+        {
+            if (endTime < 0 || endTime > 9000000000)
+                throw new Exception($"EndTime must be between 0 and 9000000000");
+
+            var nanoEndTime = 1000000000 * endTime;
+            TimeSpan timeSpan = new TimeSpan(nanoEndTime);
+            return await CreateNewTimer(timeSpan).ConfigureAwait(false);
+        }
+
+        public async Task<Result<string>> CreateNewTimerString(string minutesStr, string secondsStr)
+        {
+            int hours = 0;
+            int minutes;
+            int seconds;
+
+            if (String.IsNullOrWhiteSpace(minutesStr) || !int.TryParse(minutesStr,out minutes)) { throw new Exception($"Minutes {minutesStr} are not valid."); }
+            if (String.IsNullOrWhiteSpace(minutesStr) || !int.TryParse(secondsStr, out seconds)) { throw new Exception($"Seconds {secondsStr} are not valid."); }
+
+            TimeSpan timeSpan = new TimeSpan(hours, minutes, seconds);
+            return await CreateNewTimer(timeSpan).ConfigureAwait(false);
+        }
+
+        public async Task<Result<long>> GetElapsedSeconds(string timerId)
         {
             throw new NotImplementedException();
         }

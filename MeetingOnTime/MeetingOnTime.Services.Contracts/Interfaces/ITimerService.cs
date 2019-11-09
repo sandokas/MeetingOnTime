@@ -8,7 +8,9 @@ namespace MeetingOnTime.Services.Contracts.Interfaces
 {
     public interface ITimerService
     {
-        Task<Result<string>> CreateNewTimer();
+        Task<Result<string>> CreateNewTimer(TimeSpan endTime);
+        Task<Result<string>> CreateNewTimerSeconds(long endTime);
+        Task<Result<string>> CreateNewTimerString(string minutes, string seconds);
         Task<Result<TimeSpan>> GetElapsedTimeSpan(string timerId);
         Task<Result<long>> GetElapsedSeconds(string timerId);
         Task<Result<string>> GetElapsedString(string timerId);
